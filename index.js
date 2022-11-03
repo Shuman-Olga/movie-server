@@ -4,10 +4,12 @@ const express = require('express'),
   dotenv = require('dotenv');
 dotenv.config();
 
-var corsOptions = {
-  origin: 'https://main--preeminent-pony-b2098d.netlify.app',
-};
-app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
