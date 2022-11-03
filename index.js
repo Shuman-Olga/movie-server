@@ -3,10 +3,9 @@ const express = require('express'),
   cors = require('cors'),
   dotenv = require('dotenv');
 dotenv.config();
-const corsOptions = {
-  origin: '*',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+
+var corsOptions = {
+  origin: 'https://main--preeminent-pony-b2098d.netlify.app',
 };
 app.use(cors(corsOptions));
 
