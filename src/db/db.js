@@ -1,15 +1,20 @@
-const mysql = require('mysql2');
+module.exports = function () {
+  const mysql = require('mysql2');
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+  const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    connectTimeout: 30000,
+  });
 
-db.connect((error) => {
-  if (error) throw error;
-  console.log('Successfully connected to the database.');
-});
-
-module.exports = db;
+  connection.connect((error) => {
+    if (err) {
+      console.log(`connectionRequest Failed ${err.stack}`);
+    } else {
+      console.log(`DB connectionRequest Successful ${connection.threadId}`);
+    }
+  });
+  return connection;
+};
